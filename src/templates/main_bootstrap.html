@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Simple interface to make some music using a raspberry pi">
+    <meta name="author" content="Robert Filter">
+    <link rel="icon" href="">
+    <title>{{ title }}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{{ title }}</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#sl">List of Streams</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>My awesome Jukebox</h1>
+            <div class="btn-group btn-group-justified">
+                <a href="/stop" class="btn btn-lg btn-warning">Stop</a>
+                <a href="/shutdown_server" class="btn btn-lg btn-danger">Shutdown Jukebox</a>
+                <a href="/shutdown" class="btn btn-lg btn-danger">Shutdown Pi</a>
+            </div>
+        </div>
+
+      <div id="sl">
+        {% for entry in entries %}
+        <div class="well">
+        <h2>{{ entry.name }}</h2>
+          <div class="row">
+            <div class="col-md-3">
+               <div></div>
+            </div>
+            <div class="col-md-3">
+               <div>Genre: <b>{{ entry.genre }}</b></div>
+            </div>
+            <div class="col-md-3">
+               <div>Rating: <b>{{ entry.rating }}</b></div>
+            </div>
+            <div class="col-md-3">
+                <div class="pull-right">
+                    <a class="btn btn-info btn-large" href="/{{ entry.id }}">PLAY</a>
+                </div>
+            </div>
+           </div>
+
+        </div>
+        {% else %}
+            <li><em>Unbelievable.  No entries so far</em>
+        {% endfor %}
+       </div>
+       </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
